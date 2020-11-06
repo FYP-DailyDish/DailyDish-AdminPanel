@@ -1,0 +1,17 @@
+.menu-container {
+  height: 100%;
+  width: 250px;
+  background-color: #f5f6fa;
+  padding: 20px;
+}
+
+.dash-container{
+    height: 100vh;
+    width: 100vw;
+}
+.nav-text{
+    padding: 10px;
+}
+.nav{
+    background-color: #f5f6fa
+}
