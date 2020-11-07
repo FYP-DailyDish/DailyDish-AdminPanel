@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import UpdateIcon from "@material-ui/icons/Update";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import SmartphoneIcon from "@material-ui/icons/Smartphone";
@@ -29,7 +28,7 @@ export const SideBarData = [
   {
     title: 'Chef',
     icon: <FastfoodIcon />,
-    link: "/chefs",
+    Link: "/chefs",
   },
   {
     title: "Orders Feed",

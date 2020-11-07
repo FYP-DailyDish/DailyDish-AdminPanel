@@ -1,0 +1,25 @@
+.profile-photo{
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border: 1.5px solid black;
+}
+
+.image-holder{
+padding: 1%;
+text-align: center;
+
+}
+.name-holder{
+    
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+}
+.email-holder{
+    text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.cred-container{
+    padding-top: 3%;
+}

@@ -10,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setloading] = useState(true);
+  
 
   function signup(email, password, username) {
     console.log("i am here");
@@ -30,8 +31,11 @@ export function AuthProvider({ children }) {
     return auth.signInWithEmailAndPassword(email, password);
   }
 
-  function logout(){
-      return auth.signOut();
+  function logout() {
+    return auth.signOut();
+  }
+  function ResetPass(email) {
+    return auth.sendPasswordResetEmail(email);
   }
 
   useEffect(() => {
@@ -42,11 +46,17 @@ export function AuthProvider({ children }) {
     return unsub;
   }, []);
 
+ 
+
+  
+
   const value = {
     currentUser,
     signup,
     login,
-    logout
+    logout,
+    ResetPass,
+   
   };
   return (
     <AuthContext.Provider value={value}>

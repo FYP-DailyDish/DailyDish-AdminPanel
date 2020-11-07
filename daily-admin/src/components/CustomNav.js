@@ -1,7 +1,8 @@
-import React , {useState}from "react";
+import React, { useState } from "react";
 import { Navbar, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import Logo from "../images/Logo.png";
 import "./Sidemenu.css";
 
 function CustomNavbar() {
@@ -20,7 +21,13 @@ function CustomNavbar() {
   return (
     <Navbar className="nav" fixed="top">
       {error && <Alert variant="danger"> {error}</Alert>}
-      <Navbar.Brand> Welcome DailyDish Admin</Navbar.Brand>
+      <Navbar.Brand>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          {" "}
+          <img className="nav-logo" alt="logo" src={Logo} />
+          <strong className="nav-title">Welcome DailyDish Admin</strong>
+        </Link>
+      </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text className="nav-text">
