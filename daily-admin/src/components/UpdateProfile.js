@@ -3,11 +3,12 @@ import CustomNavbar from "./CustomNav";
 import "./Sidemenu.css";
 import SideMenuComp from "./SideMenuComp";
 import "./content.css";
-import { Card, Alert, Button } from "react-bootstrap";
+import { Card, Alert, Button, Spinner } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import firebase from "firebase";
 import "./UpdateProfile.css";
+
 function UpdateProfile() {
   let file = {};
   const [Pimage, setPimage] = useState("");
@@ -16,9 +17,25 @@ function UpdateProfile() {
   const [uploadMessage, setuploadMessage] = useState("");
   const [Pavail, setPavail] = useState(false);
   const [loading, setloading] = useState(false);
+  const [dataLoading, setdataLoading] = useState(false);
 
-  useEffect(() => {
-    let name = db
+  const getPicture = async () => {
+    setdataLoading(true);
+    await firebase
+      .storage()
+      .ref("users/" + currentUser.uid + "/profile.jpg")
+      .getDownloadURL()
+      .then((imgUrl) => {
+        setdataLoading(false);
+        setPimage(imgUrl);
+        setPavail(true);
+      })
+      .catch(() => {
+        setdataLoading(false);
+      });
+  };
+  const getUserName = async () => {
+    await db
       .collection("admin-users")
       .doc(currentUser.uid)
       .get()
@@ -26,20 +43,13 @@ function UpdateProfile() {
         console.log(cred.data().UserName);
         setuserName(cred.data().UserName);
       });
-
-    return name;
-  }, []);
+  };
 
   useEffect(() => {
-    let pic = firebase
-      .storage()
-      .ref("users/" + currentUser.uid + "/profile.jpg")
-      .getDownloadURL()
-      .then((imgUrl) => {
-        setPavail(true);
-        setPimage(imgUrl);
-      });
-    return pic;
+    const unsub = getPicture();
+    const name = getUserName();
+
+    return name && unsub;
   }, [uploadMessage]);
 
   function chooseFile(e) {
@@ -75,31 +85,40 @@ function UpdateProfile() {
                 <Alert variant="success">{uploadMessage}</Alert>
               )}
               <div>
-                {Pavail ? (
-                  <div className="image-holder">
-                    <img
-                      id="new-image"
-                      className="profile-photo"
-                      alt="profile image"
-                      src={Pimage}
-                    />
+                {dataLoading ? (
+                  <div className="spinner-holder">
+                    <Spinner animation="border" />
                   </div>
                 ) : (
                   <div>
-                    <h3>Your Profile Photo isn't set yet!</h3>
-                    <input
-                      type="file"
-                      onChange={(event) => {
-                        chooseFile(event);
-                      }}
-                    />
-                    <Button
-                      onClick={uploadImage}
-                      disabled={loading}
-                      variant="secondary"
-                    >
-                      Upload Profile Photo
-                    </Button>
+                    {Pavail ? (
+                      <div className="image-holder">
+                        <img
+                          id="new-image"
+                          className="profile-photo"
+                          alt="profile image"
+                          src={Pimage}
+                        />
+                      </div>
+                    ) : (
+                      <div >
+
+                        <h3 className="pmessage-holder">Your Profile Photo isn't set yet!</h3>
+                        <input
+                          type="file"
+                          onChange={(event) => {
+                            chooseFile(event);
+                          }}
+                        />
+                        <Button
+                          onClick={uploadImage}
+                          disabled={loading}
+                          variant="secondary"
+                        >
+                          Upload Profile Photo
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

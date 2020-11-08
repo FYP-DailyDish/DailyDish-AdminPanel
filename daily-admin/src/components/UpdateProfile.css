@@ -23,3 +23,9 @@ text-align: center;
 .cred-container{
     padding-top: 3%;
 }
+.spinner-holder{
+    text-align: center;
+}
+.pmessage-holder{
+    padding-bottom: 10px;
+}
