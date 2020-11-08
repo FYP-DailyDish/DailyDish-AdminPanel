@@ -1,0 +1,31 @@
+.feed-holder {
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+  margin: 10px;
+  background-color: #f5f6fa;  
+  justify-content: center;
+  justify-items: center;
+  height: 5vh;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+ 
+}
+.list-item{
+    
+  
+}
+.active-feedlist {
+
+
+    
+}
+.div-list{
+   /* background-color: red; */
+   
+}
+.timestamp{
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+   font-size: 15px;
+   float: right;
+}
