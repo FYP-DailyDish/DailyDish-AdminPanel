@@ -6,9 +6,8 @@ import { db } from "../Firebase";
 import { Button, Spinner } from "react-bootstrap";
 import "./AdminUser.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import ListFeed from "./ListFeed";
+import AdminViewList from "./AdminViewList";
 import firebase from "firebase";
-
 
 function Adminusers() {
   const { currentUser } = useAuth();
@@ -24,11 +23,12 @@ function Adminusers() {
         snapshot.docs.map((doc) => ({
           id: doc.id,
           UserName: doc.data().UserName,
-          timestamp: doc.data().timestamp.toDate().toString()
-         
+          timestamp: doc.data().timestamp,
+          AdminStatus: doc.data().AdminStatus,
         }))
       );
     });
+
     setdataLoading(false);
   };
   useEffect(() => {
@@ -98,9 +98,14 @@ function Adminusers() {
             ) : (
               <div>
                 {/* <img src={Pimage}  /> */}
-                
+
                 {adminUsers.map((user) => (
-                  <ListFeed key={user.id} user={user.UserName}  time={user.timestamp}/>
+                  <AdminViewList
+                    key={user.id}
+                    user={user.UserName}
+                    time={user.timestamp.toDate().toString()}
+                    adminstatus={user.AdminStatus}
+                  />
                 ))}
               </div>
             )}

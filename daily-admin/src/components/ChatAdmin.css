@@ -1,0 +1,25 @@
+.content-div {
+    padding: 10vh;
+    float: right;
+    align-content: center;
+    height: 100vh;
+    width: 80vw;
+    margin: 1rem;
+  }
+  .activity-feed {
+   border: 1px solid black;
+   height: 85vh;
+   background-color: #f5f6fa;
+  }
+  .btn-chat{
+      background-color: #a4b0be;
+      
+  }
+  .input-holder{
+      width: 60vw;
+      padding-left: 50px;
+  }
+  .title-holder{
+      font-size: 40px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }

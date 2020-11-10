@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Button, Alert } from "react-bootstrap";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../images/Logo.png";
+import { db } from "../Firebase";
+
 import "./Sidemenu.css";
 
 function CustomNavbar() {
   const { currentUser, logout } = useAuth();
   const [error, seterror] = useState("");
   const history = useHistory();
+  const [adminUsers, setadminUsers] = useState([]);
+
+  const getallAdminUsers = async () => {
+    await db
+      .collection("admin-users")
+      .doc(currentUser.uid)
+      .get()
+      .then((cred) => {
+        console.log();
+        setadminUsers(cred.data().AdminStatus);
+      });
+  };
+
   async function handleLogout() {
     seterror("");
     try {
@@ -18,6 +33,16 @@ function CustomNavbar() {
       seterror("Failed to logout! ");
     }
   }
+
+  useEffect(() => {
+    getallAdminUsers();
+    // getPicture();
+
+    return () => {
+      setadminUsers([]);
+    };
+  }, []);
+
   return (
     <Navbar className="nav" fixed="top">
       {error && <Alert variant="danger"> {error}</Alert>}
@@ -31,10 +56,15 @@ function CustomNavbar() {
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text className="nav-text">
+          {/* {console.log(adminUsers)} */}
           Signed in as:{" "}
           <Link to="/update-profile">
             <strong className="user-email">{currentUser.email}</strong>
           </Link>
+          <div>
+            {" "}
+            <strong>Admin Position :</strong> {adminUsers}
+          </div>
         </Navbar.Text>
         <Button variant="outline-dark" onClick={handleLogout}>
           {" "}

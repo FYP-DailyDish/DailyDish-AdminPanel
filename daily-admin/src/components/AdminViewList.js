@@ -1,9 +1,8 @@
 import React from "react";
-import "./ListFeed.css";
+import "./AdminViewList.css";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 
-function ListFeed({ key, user, time }) {
-   
+function AdminViewList({ key, user, time, adminstatus }) {
   return (
     <div className="feed-holder">
       <ul style={{ listStyleType: "none" }} className="active-feedlist">
@@ -12,10 +11,14 @@ function ListFeed({ key, user, time }) {
             <SupervisorAccountIcon /> {user}
             <div className="timestamp">
               <p>
-                <strong>Joined on:</strong> {time.slice(0,21)}
+                <strong> Joined on:</strong> {time.slice(0, 21)}
               </p>
             </div>
-            {/* {console.log(time)} */}
+            <div className="admin-info">
+              <p>
+                <strong>Admin Position: </strong> {adminstatus}
+              </p>
+            </div>
           </div>
         </li>
       </ul>
@@ -23,4 +26,4 @@ function ListFeed({ key, user, time }) {
   );
 }
 
-export default ListFeed;
+export default AdminViewList;
