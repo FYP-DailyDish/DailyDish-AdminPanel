@@ -4,6 +4,8 @@ import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../images/Logo.png";
 import { db } from "../Firebase";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import GradeIcon from '@material-ui/icons/Grade';
 
 import "./Sidemenu.css";
 
@@ -19,7 +21,6 @@ function CustomNavbar() {
       .doc(currentUser.uid)
       .get()
       .then((cred) => {
-        console.log();
         setadminUsers(cred.data().AdminStatus);
       });
   };
@@ -46,28 +47,26 @@ function CustomNavbar() {
   return (
     <Navbar className="nav" fixed="top">
       {error && <Alert variant="danger"> {error}</Alert>}
-      <Navbar.Brand>
+      <Navbar.Brand className="title-control">
         <Link to="/" style={{ textDecoration: "none" }}>
           {" "}
           <img className="nav-logo" alt="logo" src={Logo} />
-          <strong className="nav-title">Welcome DailyDish Admin</strong>
+          <strong className="nav-title">DailyDish Admin-Panel</strong>
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end">
         <Navbar.Text className="nav-text">
-          {/* {console.log(adminUsers)} */}
-          Signed in as:{" "}
+         <AccountCircleIcon/> Signed in as:{" "}
           <Link to="/update-profile">
             <strong className="user-email">{currentUser.email}</strong>
           </Link>
-          <div>
-            {" "}
-            <strong>Admin Position :</strong> {adminUsers}
-          </div>
+         
         </Navbar.Text>
+        <Navbar.Text className="admin-statusholder">
+            <strong> <GradeIcon style={{color: "#f39c12"}}  />Position :</strong> {adminUsers}
+          </Navbar.Text>
         <Button variant="outline-dark" onClick={handleLogout}>
-          {" "}
           Logout
         </Button>
       </Navbar.Collapse>

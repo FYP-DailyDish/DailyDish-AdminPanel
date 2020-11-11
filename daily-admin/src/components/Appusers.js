@@ -20,7 +20,7 @@ function Appusers() {
   const getallAdminUsers = async () => {
     setdataLoading(true);
 
-    await db.collection("app-users").onSnapshot((snapshot) => {
+    await db.collection("app-users").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
       setadminUsers(
         snapshot.docs.map((doc) => ({
           id: doc.id,

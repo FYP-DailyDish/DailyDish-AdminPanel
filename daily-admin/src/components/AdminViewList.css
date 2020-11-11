@@ -1,28 +1,43 @@
-.feed-holder {
+.adminfeed-holder {
   padding: 10px;
-  border: 1px solid black;
-  border-radius: 20px;
+  border: 1px dotted gray ;
   margin: 10px;
   background-color: #f5f6fa;
   justify-content: center;
   justify-items: center;
-  height: 5vh;
+  height: 12vh;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
 .list-item {
+
 }
 .active-feedlist {
 }
-.div-list {
+.admindiv-list {
   /* background-color: red; */
+  position: relative;
 }
-.timestamp {
+.admin-timestamp {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  font-size: 85%;
+  font-size: 90%;
   float: right;
   padding-left: 3%;
 }
 .admin-info {
     float: right;
+}
+.super-controls{
+padding: 2%;
+}
+
+.super-controls{
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  
+}
+.superadmin-control{
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: 90%;
 }

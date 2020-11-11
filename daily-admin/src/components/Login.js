@@ -12,14 +12,22 @@ export default function Login() {
   const [loading, setloading] = useState(false);
   const { login } = useAuth();
   const history = useHistory();
+  function validateEmail() {
+    return /^\"?[\w-_\.]*\"?@dailydishadmin\.com$/.test(emailRef.current.value);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("i am triggered");
+    console.log("Validation Function ", validateEmail());
 
     try {
-      setloading(true);
       setError("");
+      if (validateEmail() == false) {
+        return setError("Invalid Admin Email") 
+      }
+      setloading(true);
+
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
     } catch (err) {

@@ -14,8 +14,11 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const history = useHistory();
-
+  function validateEmail() {
+    return /^\"?[\w-_\.]*\"?@dailydishadmin\.com$/.test(emailRef.current.value);
+  }
   async function handleSubmit(e) {
+    console.log("Validation Function ", validateEmail());
     e.preventDefault();
     console.log("i am triggered");
     console.log(`pass1 ${passwordRef.current.value}`);
@@ -24,6 +27,8 @@ export default function Signup() {
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Passwords Do not match!");
+    } else if (validateEmail() == false) {
+      return setError("Not a Valid admin Email Domain!");
     }
 
     try {
@@ -52,7 +57,7 @@ export default function Signup() {
         <Card>
           <Card.Body>
             <h2 className="text-center mb-4">Sign Up Form</h2>
-            <img className="logo-img" alt="logo" src={Logo} />
+            <img className="logo-img"  alt="logo" src={Logo} />
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
               <Form.Group id="userName">
