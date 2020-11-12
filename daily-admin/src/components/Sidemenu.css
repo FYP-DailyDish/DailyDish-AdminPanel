@@ -4,19 +4,17 @@
   min-width: 15vw;
   background-color: #f5f6fa;
   padding-top: 5vh;
- margin: auto;
+  margin: auto;
   position: fixed;
   display: block;
-
-
 }
 .nav-title {
   color: black !important;
 }
 .nav-logo {
-  width: 50px;
-  height: 50px;
-  padding: 5px;
+  width: 5.5vmin;
+  height: 5.5vmin;
+  padding: 1%;
   border-radius: 20%;
 }
 
@@ -30,8 +28,8 @@
 .nav {
   background-color: #f5f6fa;
   position: fixed;
-  max-width: 100vw;    
-  min-width: 20vw ;
+  max-width: 100vw;
+  min-width: 20vw;
   max-height: 8vh;
   min-height: 5vh;
 }
@@ -41,7 +39,6 @@
   padding: 0;
   display: block;
   margin-top: 2rem;
-  
 }
 
 .sidebar-list .row {
@@ -73,14 +70,23 @@
 .sidebar-list #active {
   background-color: #dfe4ea;
 }
-.admin-statusholder{
- padding-right: 5%;
+.admin-statusholder {
+  padding-right: 5%;
 }
-.title-control{
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-text-align: center;
-justify-content: center;
-align-content: center;
-align-items: center;
+.title-control {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  width: auto;
+  height: auto;
+  font-size: 2.5vmin;
+  display: flex;
 
+  display: block;
+
+  padding-right: 1%;
+}
+.user-email {
+  font-size: 2vmin;
+}
+.admin-statusholder {
+  font-size: 2vmin;
 }

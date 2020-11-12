@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import CustomNavbar from "./CustomNav";
 import SideMenuComp from "./SideMenuComp";
 import { useAuth } from "../context/AuthContext";
@@ -7,16 +7,16 @@ import { Button, Spinner } from "react-bootstrap";
 import "./AdminUser.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import AdminViewList from "./AdminViewList";
+import "./AdminViewList.css";
+import "./content.css";
 
 function Adminusers() {
-
-  const { currentUser } = useAuth();
+  const { currentUser, disable } = useAuth();
   const [dataLoading, setdataLoading] = useState(false);
   const [adminUsers, setadminUsers] = useState([]);
   const [loginUserAdminStatus, setloginUserAdminStatus] = useState("");
   // const [Pimage, setPimage] = useState("");
 
- 
   const currentUserAdminStatus = async () => {
     await db
       .collection("admin-users")
@@ -29,7 +29,6 @@ function Adminusers() {
   };
 
   const getallAdminUsers = async () => {
-    
     setdataLoading(true);
 
     await db
@@ -94,18 +93,17 @@ function Adminusers() {
       <CustomNavbar />
       <SideMenuComp />
       <div className="content-div">
-        <div className="activity-feed">
+        <div className="adminactivity-feed">
           <div className="title-holder">
-            <h1>
-              Registered DailyDish Admins{" "}
-              <Button
-                className="btn-refresh"
-                variant="dark"
-                onClick={reloadHandler}
-              >
-                <RefreshIcon />
-              </Button>
-            </h1>
+            <p className="title-size">DailyDish Admins</p>
+            <Button
+              className="btn-refresh"
+              variant="dark"
+              onClick={reloadHandler}
+            >
+              <RefreshIcon />
+              Refresh List
+            </Button>
           </div>
 
           <div>
@@ -114,15 +112,19 @@ function Adminusers() {
               <Spinner animation="border" />
             ) : (
               <div>
-                {/* <img src={Pimage}  /> */}
+                {adminUsers.map((user) => {
+                  console.log(user.id);
+                })}
 
                 {adminUsers.map((user) => (
                   <AdminViewList
                     key={user.id}
+                    userID={user.id}
                     user={user.UserName}
                     time={user.timestamp.toDate().toString()}
                     adminstatus={user.AdminStatus}
                     loginUserAdminStatus={loginUserAdminStatus}
+                    disable={disable}
                   />
                 ))}
               </div>

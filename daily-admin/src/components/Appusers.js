@@ -78,7 +78,7 @@ function Appusers() {
       <CustomNavbar />
       <SideMenuComp />
       <div className="content-div">
-        <div className="activity-feed">
+        <div className="useractivity-feed">
           <div className="title-holder">
             <h1>
               Registered DailyDish Application Users

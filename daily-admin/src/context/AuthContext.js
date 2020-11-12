@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth, db } from "../Firebase";
+import { auth, db} from "../Firebase";
 import firebase from "firebase";
-import * as admin from "firebase-admin";
 
 const AuthContext = React.createContext();
 export function useAuth() {
@@ -24,6 +23,7 @@ export function AuthProvider({ children }) {
         UserName: username,
         Useremail: email,
         AdminStatus: adminStatus,
+        Disbale: false,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     });
@@ -32,11 +32,7 @@ export function AuthProvider({ children }) {
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
   }
-  function disable(userID) {
-    return admin.auth().updateUser(userID, {
-      disabled: true,
-    });
-  }
+ 
 
   function logout() {
     return auth.signOut();
@@ -45,7 +41,6 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
- 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -60,7 +55,6 @@ export function AuthProvider({ children }) {
     login,
     logout,
     ResetPass,
-    disable,
     
   };
   return (

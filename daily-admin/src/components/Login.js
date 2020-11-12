@@ -12,6 +12,9 @@ export default function Login() {
   const [loading, setloading] = useState(false);
   const { login } = useAuth();
   const history = useHistory();
+
+
+  
   function validateEmail() {
     return /^\"?[\w-_\.]*\"?@dailydishadmin\.com$/.test(emailRef.current.value);
   }
@@ -28,7 +31,7 @@ export default function Login() {
       }
       setloading(true);
 
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(emailRef.current.value, passwordRef.current.value)
       history.push("/");
     } catch (err) {
       setError("Failed to Sign In ");

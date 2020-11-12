@@ -2,15 +2,17 @@
   padding: 10px;
   border: 1px dotted gray ;
   margin: 10px;
-  background-color: #f5f6fa;
+  
   justify-content: center;
   justify-items: center;
-  height: 12vh;
+  height: auto;
+  width: auto;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
 .list-item {
-
+width: auto;
+height: auto;
 }
 .active-feedlist {
 }
@@ -40,4 +42,12 @@ padding: 2%;
 .superadmin-control{
 font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 font-size: 90%;
+}
+.title-holder{
+  width: auto;
+  height: auto;
+ 
+}
+.title-size{
+  font-size: 3.5vmin;
 }

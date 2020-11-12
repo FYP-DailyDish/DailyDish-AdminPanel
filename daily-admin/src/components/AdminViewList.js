@@ -3,7 +3,26 @@ import { Button } from "react-bootstrap";
 import "./AdminViewList.css";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 
-function AdminViewList({ key, user, time, adminstatus, loginUserAdminStatus }) {
+function AdminViewList({
+  key,
+  userID,
+  user,
+  time,
+  adminstatus,
+  loginUserAdminStatus,
+  disable,
+}) {
+  async function handleDisable(e) {
+    e.preventDefault();
+    console.log("i am triggered ❌ ");
+    try {
+      // console.log(user)
+      // console.log(userID)
+      // await disable(userID);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div className="adminfeed-holder">
       <ul style={{ listStyleType: "none" }} className="active-feedlist">
@@ -31,7 +50,11 @@ function AdminViewList({ key, user, time, adminstatus, loginUserAdminStatus }) {
                     <Button style={{ marginRight: "2%" }} variant="info">
                       View Profile
                     </Button>
-                    <Button style={{ marginRight: "2%" }} variant="warning">
+                    <Button
+                      style={{ marginRight: "2%" }}
+                      variant="warning"
+                      onClick={handleDisable}
+                    >
                       Disable Admin
                     </Button>
                     <Button style={{ marginRight: "2%" }} variant="danger">
@@ -40,7 +63,9 @@ function AdminViewList({ key, user, time, adminstatus, loginUserAdminStatus }) {
                   </div>
                 ) : (
                   <div className="super-controls">
-                    <p className="superadmin-control">You are Currently Logged-in</p>
+                    <p className="superadmin-control">
+                      You are Currently Logged-in
+                    </p>
                   </div>
                 )}
               </div>
