@@ -2,7 +2,6 @@ import firebase from "firebase/app";
 import all from "firebase";
 import "firebase/auth";
 
-
 //import fire from "firebase";
 // import "firebase/auth";
 //import auth from "firebase";
@@ -24,7 +23,6 @@ const application = firebase.initializeApp({
   //   appId: "1:740863894800:web:60504ea1505652c267f195",
   //   measurementId: "G-NXYMZZYT4E",
 });
-//var serviceAccount = require("/Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/admin-private/dailydish-adminv2-firebase-adminsdk-vnsp6-2742717253.json");
 
 export const auth = application.auth();
 export const db = all.firestore();

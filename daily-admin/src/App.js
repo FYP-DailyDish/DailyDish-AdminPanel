@@ -13,6 +13,7 @@ import ChefComp from "./components/ChefComp";
 import OrderComp from "./components/OrderComp";
 import RiderComp from "./components/RiderComp";
 import ChatAdmin from "./components/ChatAdmin";
+import Disabled from './components/Disabled'
 function App() {
   return (
     <Router>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path='/forgot-password' component={ForgotPass}/>
+          <Route path='/disabled' component={Disabled}/>
           <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute path="/update-profile" component={UpdateProfile} />
           <PrivateRoute exact path="/admin-users" component={Adminusers} />

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import "./AdminViewList.css";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-
+import PersonIcon from "@material-ui/icons/Person";
+import CancelIcon from "@material-ui/icons/Cancel";
+import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore";
+import { db } from "../Firebase";
 function AdminViewList({
   key,
   userID,
@@ -10,19 +13,46 @@ function AdminViewList({
   time,
   adminstatus,
   loginUserAdminStatus,
-  disable,
+  disable
 }) {
-  async function handleDisable(e) {
+  const [disableStatus, setdisableStatus] = useState(false);
+
+  const DisableStatusHandlerFalse = () => {
+    db.collection("admin-users").doc(userID).set(
+      {
+        Disable: false,
+      },
+      { merge: true }
+    );
+    setdisableStatus(false);
+  };
+
+  const DisableStatusHandlerTrue = () => {
+    db.collection("admin-users").doc(userID).set(
+      {
+        Disable: true,
+      },
+      { merge: true }
+    );
+    setdisableStatus(true);
+  };
+  const TruehandleDisable = (e) => {
     e.preventDefault();
-    console.log("i am triggered ❌ ");
-    try {
-      // console.log(user)
-      // console.log(userID)
-      // await disable(userID);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+    // console.log("i am triggered ❌ ");
+    DisableStatusHandlerTrue();
+
+    // console.log(user);
+    // console.log(userID);
+    // await disable(userID);
+  };
+  const FalsehandleDisable = (e) => {
+    e.preventDefault();
+    // console.log("i am triggered ❌ ");
+    DisableStatusHandlerFalse();
+    // console.log(user);
+    // console.log(userID);
+    // await disable(userID);
+  };
   return (
     <div className="adminfeed-holder">
       <ul style={{ listStyleType: "none" }} className="active-feedlist">
@@ -43,28 +73,40 @@ function AdminViewList({
               "Passed down admin status to judge 👩‍⚖️ ",
               loginUserAdminStatus
             )} */}
-            {loginUserAdminStatus == "Super" ? (
+            {loginUserAdminStatus === "Super" ? (
               <div>
-                {adminstatus != "Super" ? (
+                {adminstatus !== "Super" ? (
                   <div className="super-controls">
                     <Button style={{ marginRight: "2%" }} variant="info">
-                      View Profile
+                      <PersonIcon /> View Profile
                     </Button>
-                    <Button
-                      style={{ marginRight: "2%" }}
-                      variant="warning"
-                      onClick={handleDisable}
-                    >
-                      Disable Admin
-                    </Button>
-                    <Button style={{ marginRight: "2%" }} variant="danger">
-                      Remove this Admin
-                    </Button>
+                    {console.log(disable)}
+                    {disable === false ? (
+                      <>
+                      <Button
+                        style={{ marginRight: "2%" }}
+                        variant="warning"
+                        onClick={TruehandleDisable}
+                      >
+                        <CancelIcon /> Disable Admin
+                      </Button>
+                      <Button variant="success">Make Super Admin</Button>
+                      </>
+                    ) : (
+                      <Button
+                        style={{ marginRight: "2%" }}
+                        variant="warning"
+                        onClick={FalsehandleDisable}
+                      >
+                        <SettingsBackupRestoreIcon /> Restore Admin
+                      </Button>
+                    )}
+                     
                   </div>
                 ) : (
                   <div className="super-controls">
                     <p className="superadmin-control">
-                      You are Currently Logged-in
+                     Hooray! You are a Super Admin!
                     </p>
                   </div>
                 )}

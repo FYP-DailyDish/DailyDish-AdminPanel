@@ -41,6 +41,8 @@ function Adminusers() {
             UserName: doc.data().UserName,
             timestamp: doc.data().timestamp,
             AdminStatus: doc.data().AdminStatus,
+            Disable: doc.data().Disable
+
           }))
         );
       });
@@ -76,6 +78,7 @@ function Adminusers() {
     setdataLoading(true);
     getallAdminUsers();
     setdataLoading(false);
+   
     // db.collection("admin-users")
     //   .onSnapshot((snapshot) => {
     //     setadminUsers(
@@ -112,9 +115,9 @@ function Adminusers() {
               <Spinner animation="border" />
             ) : (
               <div>
-                {adminUsers.map((user) => {
-                  console.log(user.id);
-                })}
+                {/* {adminUsers.map((user) => {
+                  console.log(user.Disable);
+                })} */}
 
                 {adminUsers.map((user) => (
                   <AdminViewList
@@ -124,7 +127,7 @@ function Adminusers() {
                     time={user.timestamp.toDate().toString()}
                     adminstatus={user.AdminStatus}
                     loginUserAdminStatus={loginUserAdminStatus}
-                    disable={disable}
+                    disable={user.Disable}
                   />
                 ))}
               </div>

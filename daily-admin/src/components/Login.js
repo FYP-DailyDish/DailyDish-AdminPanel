@@ -4,17 +4,35 @@ import Logo from "../images/Logo.png";
 import { useAuth } from "../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { Container } from "react-bootstrap";
+import { db } from "../Firebase";
 
 export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const [userStatus, setuserStatus] = useState(false);
   const [error, setError] = useState("");
   const [loading, setloading] = useState(false);
-  const { login } = useAuth();
+  const {  login, currentUser, } = useAuth();
+
   const history = useHistory();
 
+  // const getDisableStatus = async () => {
+  //   return db
+  //     .collection("admin-users")
+  //     .doc(currentUser.uid)
+  //     .get()
+  //     .then((doc) => {
+  //       console.log("From GetStatus handler: ", doc.data().Disable);
+  //       var status = doc.data().Disable;
+  //       if (status == false) {
+  //         setuserStatus(false);
+  //       } else {
+  //         setuserStatus(true);
+  //         console.log("Yahan par to batao zara " , userStatus)
+  //       }
+  //     });
+  // };
 
-  
   function validateEmail() {
     return /^\"?[\w-_\.]*\"?@dailydishadmin\.com$/.test(emailRef.current.value);
   }
@@ -22,17 +40,45 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log("i am triggered");
-    console.log("Validation Function ", validateEmail());
+    console.log("Email Validation Function ", validateEmail());
 
     try {
       setError("");
       if (validateEmail() == false) {
-        return setError("Invalid Admin Email") 
+        return setError("Invalid Admin Email");
       }
+
       setloading(true);
 
-      await login(emailRef.current.value, passwordRef.current.value)
+      await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
+      // if (disableStatus == true) {
+      //   console.log("i am  dissabled  💁‍♂️  ", disableStatus);
+      //   logout();
+      //   setError("Sorry, You have been Disabled by Super Admin");
+      //   history.push("/login");
+      // } else if (disableStatus == false) {
+      //   console.log("i am not dissabled", disableStatus);
+      //   history.push("/");
+      // }
+      // await db
+      //   .collection("admin-users")
+      //   .doc(currentUser.uid)
+      //   .get()
+      //   .then((doc) => {
+      //     console.log("From GetStatus handler: ", doc.data().Disable);
+      //     var status = doc.data().Disable;
+      //     if (status === false) {
+      //       console.log("i am not dissabled", status);
+      //       history.push("/");
+      //     } else if (status === true) {
+      //       console.log("i am  dissabled  💁‍♂️  ", status);
+      //       logout();
+      //       history.push("/login");
+
+      //       setError("Sorry, You have been Disabled by Super Admin");
+      //     }
+      //   });
     } catch (err) {
       setError("Failed to Sign In ");
       console.log(err);

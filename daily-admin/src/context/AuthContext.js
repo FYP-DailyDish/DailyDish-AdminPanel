@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth, db} from "../Firebase";
+import { auth, db } from "../Firebase";
 import firebase from "firebase";
 
 const AuthContext = React.createContext();
@@ -9,6 +9,9 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  const [disableStatus, setdisableStatus] = useState(false);
+  
+  
   const [loading, setloading] = useState(true);
   let adminStatus = "normal";
 
@@ -23,16 +26,18 @@ export function AuthProvider({ children }) {
         UserName: username,
         Useremail: email,
         AdminStatus: adminStatus,
-        Disbale: false,
+        Disable: false,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       });
     });
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
-  }
- 
+    return auth.signInWithEmailAndPassword(email, password)
+     
+    }
+    
+  
 
   function logout() {
     return auth.signOut();
@@ -55,7 +60,9 @@ export function AuthProvider({ children }) {
     login,
     logout,
     ResetPass,
-    
+    disableStatus,
+    loading,
+  
   };
   return (
     <AuthContext.Provider value={value}>
