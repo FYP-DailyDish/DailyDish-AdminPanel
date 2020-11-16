@@ -9,6 +9,7 @@ import firebase from "firebase";
 import MesaageFeed from "./MessagesFeed";
 import DeleteIcon from "@material-ui/icons/Delete";
 import "./ChatAdmin.css";
+import MessagesFeed from "./MessagesFeed";
 
 function ChatAdmin() {
   const [getChat, setgetChat] = useState([]);
@@ -28,8 +29,7 @@ function ChatAdmin() {
   //       console.log(cred.data())
   //     });
   // }
-  
-  
+
   const getUserName = async () => {
     await db
       .collection("admin-users")
@@ -41,15 +41,16 @@ function ChatAdmin() {
       });
   };
   useEffect(() => {
-    setDataloading(true);
+   
     const unsub = getUserName();
+    setDataloading(true);
     const anotherUnsub = messageSave();
     setDataloading(false);
     return unsub && anotherUnsub;
   }, []);
 
-  const messageHandler = async (e) => {
-    setDataloading(true);
+  const messageHandler = async(e) => {
+    
     e.preventDefault();
     await db.collection("admin-message").add({
       id: currentUser.uid,
@@ -59,28 +60,24 @@ function ChatAdmin() {
     });
     setmessages([...messages, input]);
 
-    console.log("oye bhae 👨‍🚀 ", messageRef);
     setInput("");
   };
 
-  const messageSave = async () => {
-    await db
-      .collection("admin-message")
+  const messageSave = async() => {
+   
+    await db.collection("admin-message")
       .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         setmessages(
           snapshot.docs.map((doc) => ({
-            id: doc.data().id,
+            Userid: doc.data().id,
             MessageRefID: doc.id,
             AdminName: doc.data().AdminName,
             message: doc.data().message,
+            TimeStamp: doc.data().timestamp,
           }))
         );
-        messages.map((msg) => {
-          console.log(msg.MessageRefID)
-          setmessageRef(msg.MessageRefID);
-        });
-        setDataloading(false);
+      
       });
   };
 
@@ -127,21 +124,11 @@ function ChatAdmin() {
             </div>
           ) : (
             <div>
-              {messages.map((message, id) => (
-                <li
-                  key={id}
-                  style={{ listStyleType: "none" }}
-                  className="chat-list"
-                >
-                  <div className="chat-box">
-                    <p className="message-text">
-                      <strong>{message.AdminName}:</strong> {message.message}.
-                    </p>
-                    {/* <p className="message-text">Send at: {message.timestamp== null? (<p>Reload To fetch</p>):(<p>{message.timestamp}</p>)}</p> */}
-
-                  </div>
-                </li>
-              ))}
+              <ul>
+                {messages.map((message) => (
+                  <MessagesFeed message={message} />
+                ))}
+              </ul>
             </div>
           )}
         </div>

@@ -4,37 +4,54 @@ import SideMenuComp from "./SideMenuComp";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import { Button, Spinner } from "react-bootstrap";
-
+import "./AdminUser.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import ListFeed from "./ListFeed";
-import firebase from "firebase";
-import './Appuser.css'
-
+import AppuserView from "./AppuserView"
+import "./AdminViewList.css";
+import "./content.css";
 
 function Appusers() {
-  const { currentUser } = useAuth();
+  const { currentUser, disable } = useAuth();
   const [dataLoading, setdataLoading] = useState(false);
   const [adminUsers, setadminUsers] = useState([]);
+  const [loginUserAdminStatus, setloginUserAdminStatus] = useState("");
   // const [Pimage, setPimage] = useState("");
 
-  const getallAdminUsers = async () => {
+  const currentAppStatus = async () => {
+    await db
+      .collection("admin-users")
+      .doc(currentUser.uid)
+      .get()
+      .then((doc) => {
+        console.log("Admin Status", doc.data().AdminStatus);
+        setloginUserAdminStatus(doc.data().AdminStatus);
+      });
+  };
+
+  const getallAppUsers = async () => {
     setdataLoading(true);
 
-    await db.collection("app-users").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
-      setadminUsers(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          UserName: doc.data().UserName,
-          timestamp: doc.data().timestamp.toDate().toString()
-         
-        }))
-      );
-    });
+    await db
+      .collection("app-users")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setadminUsers(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            UserName: doc.data().UserName,
+            timestamp: doc.data().timestamp,
+            AdminStatus: doc.data().AdminStatus,
+            Disable: doc.data().Disable
+
+          }))
+        );
+      });
+
     setdataLoading(false);
   };
   useEffect(() => {
-    getallAdminUsers();
-    // getPicture();
+    getallAppUsers();
+    currentAppStatus();
 
     return () => {
       setadminUsers([]);
@@ -59,8 +76,9 @@ function Appusers() {
   const reloadHandler = async () => {
     console.log("i am clicked  👨‍🚀 ");
     setdataLoading(true);
-    getallAdminUsers();
+    getallAppUsers()
     setdataLoading(false);
+   
     // db.collection("admin-users")
     //   .onSnapshot((snapshot) => {
     //     setadminUsers(
@@ -78,18 +96,17 @@ function Appusers() {
       <CustomNavbar />
       <SideMenuComp />
       <div className="content-div">
-        <div className="useractivity-feed">
+        <div className="adminactivity-feed">
           <div className="title-holder">
-            <h1>
-              Registered DailyDish Application Users
-              <Button
-                className="btn-refresh"
-                variant="dark"
-                onClick={reloadHandler}
-              >
-                <RefreshIcon />
-              </Button>
-            </h1>
+            <p className="title-size">DailyDish Application Users</p>
+            <Button
+              className="btn-refresh"
+              variant="dark"
+              onClick={reloadHandler}
+            >
+              <RefreshIcon />
+              Refresh List
+            </Button>
           </div>
 
           <div>
@@ -98,10 +115,20 @@ function Appusers() {
               <Spinner animation="border" />
             ) : (
               <div>
-                {/* <img src={Pimage}  /> */}
-                
+                {/* {adminUsers.map((user) => {
+                  console.log(user.Disable);
+                })} */}
+
                 {adminUsers.map((user) => (
-                  <ListFeed key={user.id} user={user.UserName}  time={user.timestamp}/>
+                  <AppuserView
+                    key={user.id}
+                    userID={user.id}
+                    user={user.UserName}
+                    time={user.timestamp.toDate().toString()}
+                    adminstatus={user.AdminStatus}
+                    loginUserAdminStatus={loginUserAdminStatus}
+                    disable={user.Disable}
+                  />
                 ))}
               </div>
             )}

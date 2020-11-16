@@ -38,7 +38,7 @@
 .chat-box {
   background-color: #53d769;
   width: 80vmin;
-  height: 13vmin;
+  height: 18vmin;
   align-items: center;
   border-radius: 25px;
   margin-bottom: 3%;
@@ -53,4 +53,11 @@
 }
 .btn-chat:hover{
   background-color: grey
+}
+.del-icon{
+  float : right ;
+  margin-right: 3vmin;
+
+  
+  color: red;
 }
