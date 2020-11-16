@@ -46,7 +46,7 @@ export const SideBarData = [
     Link: "/update-profile",
   },
   {
-    title: "Chat",
+    title: "Admin Chat Center",
     icon: <SendIcon />,
     Link: "/admin-chat",
   },

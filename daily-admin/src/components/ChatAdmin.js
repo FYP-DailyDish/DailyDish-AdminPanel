@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CustomNavbar from "./CustomNav";
 import SideMenuComp from "./SideMenuComp";
-import { InputGroup, FormControl } from "react-bootstrap";
+import { InputGroup, FormControl, Button, Spinner } from "react-bootstrap";
 import SendIcon from "@material-ui/icons/Send";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
@@ -15,17 +15,17 @@ function ChatAdmin() {
   const [input, setInput] = useState("");
   const [userName, setuserName] = useState("");
   const [messages, setmessages] = useState([]);
+  const [dataloading, setDataloading] = useState(true);
 
-// const getDataChat= async()=>{
-//   await db
-//     .collection("admin-message")
-//     .doc()
-//     .get()
-//     .then((cred) => {
-//       console.log(cred.data())
-//     });
-// }
-
+  // const getDataChat= async()=>{
+  //   await db
+  //     .collection("admin-message")
+  //     .doc()
+  //     .get()
+  //     .then((cred) => {
+  //       console.log(cred.data())
+  //     });
+  // }
 
   const getUserName = async () => {
     await db
@@ -38,13 +38,15 @@ function ChatAdmin() {
       });
   };
   useEffect(() => {
+    setDataloading(true);
     const unsub = getUserName();
-    // getDataChat();
-
-    return unsub;
+    const anotherUnsub = messageSave();
+    setDataloading(false);
+    return unsub && anotherUnsub;
   }, []);
 
   const messageHandler = async (e) => {
+    setDataloading(true);
     e.preventDefault();
     await db.collection("admin-message").add({
       AdminName: userName,
@@ -52,8 +54,21 @@ function ChatAdmin() {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setmessages([...messages, input]);
+  };
 
-    setInput("");
+  const messageSave = async () => {
+    await db
+      .collection("admin-message")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setmessages(
+          snapshot.docs.map((doc) => ({
+            AdminName: doc.data().AdminName,
+            message: doc.data().message,
+          }))
+        );
+        setDataloading(false);
+      });
   };
 
   return (
@@ -69,7 +84,7 @@ function ChatAdmin() {
           </div>
 
           <div className="input-holder">
-            <InputGroup className="mb-3">
+            <InputGroup className="mb-3" id="input-area">
               <FormControl
                 placeholder="Type Your Message"
                 aria-label="Type Your Message"
@@ -78,25 +93,45 @@ function ChatAdmin() {
                 onChange={(e) => setInput(e.target.value)}
               />
               <InputGroup.Append>
-                <InputGroup.Text
-                  className="btn-chat"
-                  id="basic-addon2"
-                  onClick={messageHandler}
-                >
-                  <SendIcon />
+                <InputGroup.Text className="holder">
+                  <Button
+                    type="submit"
+                    className="btn-chat"
+                    id="basic-addon2"
+                    onClick={messageHandler}
+                  >
+                    <SendIcon />
+                  </Button>
                 </InputGroup.Text>
               </InputGroup.Append>
             </InputGroup>
           </div>
           {/* {console.log(input)} */}
           {console.log(messages)}
-          {messages.map((message, id) => (
-            <li key={id} style={{ listStyleType: "none" }}>
-              <div>
-                {userName}: {message}
-              </div>
-            </li>
-          ))}
+          {dataloading == true ? (
+            <div className="spinner-holder">
+              <Spinner animation="border" />
+            </div>
+          ) : (
+            <div>
+              {messages.map((message, id) => (
+                <li
+                  key={id}
+                  style={{ listStyleType: "none" }}
+                  className="chat-list"
+                >
+                  <div className="chat-box">
+                    <p className="message-text">
+                      <strong>
+                        {message.AdminName}: {message.message}.
+                      </strong>
+                    </p>
+                    {/* <p className="message-text">Send at: {message.timestamp== null? (<p>Reload To fetch</p>):(<p>{message.timestamp}</p>)}</p> */}
+                  </div>
+                </li>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

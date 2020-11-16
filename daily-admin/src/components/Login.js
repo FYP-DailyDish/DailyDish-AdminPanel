@@ -12,26 +12,9 @@ export default function Login() {
   const [userStatus, setuserStatus] = useState(false);
   const [error, setError] = useState("");
   const [loading, setloading] = useState(false);
-  const {  login, currentUser, } = useAuth();
+  const { login, currentUser } = useAuth();
 
   const history = useHistory();
-
-  // const getDisableStatus = async () => {
-  //   return db
-  //     .collection("admin-users")
-  //     .doc(currentUser.uid)
-  //     .get()
-  //     .then((doc) => {
-  //       console.log("From GetStatus handler: ", doc.data().Disable);
-  //       var status = doc.data().Disable;
-  //       if (status == false) {
-  //         setuserStatus(false);
-  //       } else {
-  //         setuserStatus(true);
-  //         console.log("Yahan par to batao zara " , userStatus)
-  //       }
-  //     });
-  // };
 
   function validateEmail() {
     return /^\"?[\w-_\.]*\"?@dailydishadmin\.com$/.test(emailRef.current.value);
@@ -52,33 +35,6 @@ export default function Login() {
 
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/");
-      // if (disableStatus == true) {
-      //   console.log("i am  dissabled  💁‍♂️  ", disableStatus);
-      //   logout();
-      //   setError("Sorry, You have been Disabled by Super Admin");
-      //   history.push("/login");
-      // } else if (disableStatus == false) {
-      //   console.log("i am not dissabled", disableStatus);
-      //   history.push("/");
-      // }
-      // await db
-      //   .collection("admin-users")
-      //   .doc(currentUser.uid)
-      //   .get()
-      //   .then((doc) => {
-      //     console.log("From GetStatus handler: ", doc.data().Disable);
-      //     var status = doc.data().Disable;
-      //     if (status === false) {
-      //       console.log("i am not dissabled", status);
-      //       history.push("/");
-      //     } else if (status === true) {
-      //       console.log("i am  dissabled  💁‍♂️  ", status);
-      //       logout();
-      //       history.push("/login");
-
-      //       setError("Sorry, You have been Disabled by Super Admin");
-      //     }
-      //   });
     } catch (err) {
       setError("Failed to Sign In ");
       console.log(err);

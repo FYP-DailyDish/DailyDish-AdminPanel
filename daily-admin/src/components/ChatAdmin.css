@@ -1,25 +1,56 @@
 .content-div {
-    padding: 10vh;
-    float: right;
-    align-content: center;
-    height: 100vh;
-    width: 80vw;
-    margin: 1rem;
-  }
-  .activity-feed {
-   border: 1px solid black;
-   height: 85vh;
-   background-color: #f5f6fa;
-  }
-  .btn-chat{
-      background-color: #a4b0be;
-      
-  }
-  .input-holder{
-      width: 60vw;
-      padding-left: 50px;
-  }
-  .title-holder{
-      font-size: 40px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
+  padding: 10vh;
+  float: right;
+  align-content: center;
+  height: 100vh;
+  width: 80vw;
+  margin: 1rem;
+}
+.activity-feed {
+  height: 85vh;
+}
+.btn-chat {
+  background-color: grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+  height: 35px;
+  border: none;
+}
+.input-holder {
+  width: 130vmin;
+  padding-left: 5%;
+}
+.title-holder {
+  font-size: 40px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.holder {
+  background-color: grey;
+  height: 5.5vh;
+  text-align: center;
+  justify-content: center;
+}
+.chat-list {
+  justify-content: center;
+}
+.chat-box {
+  background-color: #53d769;
+  width: 80vmin;
+  height: 10vmin;
+  align-items: center;
+  border-radius: 25px;
+  margin-bottom: 3%;
+  margin-left: 20%;
+  justify-content: center;
+}
+.message-text {
+  text-align: center;
+  justify-content: center;
+  color: white;
+  padding-top: 2%;
+}
+.btn-chat:hover{
+  background-color: grey
+}

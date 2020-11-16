@@ -8,6 +8,7 @@ import { useAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import firebase from "firebase";
 import "./UpdateProfile.css";
+import GradeIcon from "@material-ui/icons/Grade";
 
 function UpdateProfile() {
   let file = {};
@@ -18,6 +19,7 @@ function UpdateProfile() {
   const [Pavail, setPavail] = useState(false);
   const [loading, setloading] = useState(false);
   const [dataLoading, setdataLoading] = useState(false);
+  const [adminStatus, setadminStatus] = useState("");
 
   const getPicture = async () => {
     setdataLoading(true);
@@ -42,6 +44,7 @@ function UpdateProfile() {
       .then((cred) => {
         console.log(cred.data().UserName);
         setuserName(cred.data().UserName);
+        setadminStatus(cred.data().AdminStatus);
       });
   };
 
@@ -101,9 +104,10 @@ function UpdateProfile() {
                         />
                       </div>
                     ) : (
-                      <div >
-
-                        <h3 className="pmessage-holder">Your Profile Photo isn't set yet!</h3>
+                      <div>
+                        <h3 className="pmessage-holder">
+                          Your Profile Photo isn't set yet!
+                        </h3>
                         <input
                           type="file"
                           onChange={(event) => {
@@ -131,7 +135,18 @@ function UpdateProfile() {
 
                 <div className="email-holder">
                   <h3>{currentUser.email}</h3>
+                  <p>
+                    
+                    {adminStatus == "Super" ? (
+                      <p>
+                        Admin Status :<GradeIcon /> {adminStatus}
+                      </p>
+                    ) : (
+                      <p>Admin Status :{adminStatus}</p>
+                    )}
+                  </p>
                 </div>
+                <div></div>
               </div>
             </Card.Body>
           </Card>

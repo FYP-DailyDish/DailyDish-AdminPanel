@@ -5,6 +5,7 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import PersonIcon from "@material-ui/icons/Person";
 import CancelIcon from "@material-ui/icons/Cancel";
 import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore";
+import GradeIcon from "@material-ui/icons/Grade";
 import { db } from "../Firebase";
 function AdminViewList({
   key,
@@ -13,9 +14,19 @@ function AdminViewList({
   time,
   adminstatus,
   loginUserAdminStatus,
-  disable
+  disable,
 }) {
   const [disableStatus, setdisableStatus] = useState(false);
+
+  const SuperAdminMaker = () => {
+    console.log("You Have Upgraded an admin");
+    db.collection("admin-users").doc(userID).set(
+      {
+        AdminStatus: "Super",
+      },
+      { merge: true }
+    );
+  };
 
   const DisableStatusHandlerFalse = () => {
     db.collection("admin-users").doc(userID).set(
@@ -83,14 +94,16 @@ function AdminViewList({
                     {console.log(disable)}
                     {disable === false ? (
                       <>
-                      <Button
-                        style={{ marginRight: "2%" }}
-                        variant="warning"
-                        onClick={TruehandleDisable}
-                      >
-                        <CancelIcon /> Disable Admin
-                      </Button>
-                      <Button variant="success">Make Super Admin</Button>
+                        <Button
+                          style={{ marginRight: "2%" }}
+                          variant="warning"
+                          onClick={TruehandleDisable}
+                        >
+                          <CancelIcon /> Disable Admin
+                        </Button>
+                        <Button variant="success" onClick={SuperAdminMaker}>
+                          <GradeIcon/> Make Super Admin
+                        </Button>
                       </>
                     ) : (
                       <Button
@@ -101,13 +114,16 @@ function AdminViewList({
                         <SettingsBackupRestoreIcon /> Restore Admin
                       </Button>
                     )}
-                     
                   </div>
                 ) : (
                   <div className="super-controls">
                     <p className="superadmin-control">
-                     Hooray! You are a Super Admin!
+                     <GradeIcon/> Super Admin
+                     <Button style={{marginLeft:"3vmin"}} variant="info">
+                      <PersonIcon /> View Profile
+                    </Button> 
                     </p>
+                  
                   </div>
                 )}
               </div>
