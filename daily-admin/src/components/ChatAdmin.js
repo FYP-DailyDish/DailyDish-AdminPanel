@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext";
 import { db } from "../Firebase";
 import firebase from "firebase";
 import MesaageFeed from "./MessagesFeed";
+import DeleteIcon from "@material-ui/icons/Delete";
 import "./ChatAdmin.css";
 
 function ChatAdmin() {
@@ -16,6 +17,7 @@ function ChatAdmin() {
   const [userName, setuserName] = useState("");
   const [messages, setmessages] = useState([]);
   const [dataloading, setDataloading] = useState(true);
+  const [messageRef, setmessageRef] = useState("");
 
   // const getDataChat= async()=>{
   //   await db
@@ -26,7 +28,8 @@ function ChatAdmin() {
   //       console.log(cred.data())
   //     });
   // }
-
+  
+  
   const getUserName = async () => {
     await db
       .collection("admin-users")
@@ -49,11 +52,15 @@ function ChatAdmin() {
     setDataloading(true);
     e.preventDefault();
     await db.collection("admin-message").add({
+      id: currentUser.uid,
       AdminName: userName,
       message: input,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     setmessages([...messages, input]);
+
+    console.log("oye bhae 👨‍🚀 ", messageRef);
+    setInput("");
   };
 
   const messageSave = async () => {
@@ -63,10 +70,16 @@ function ChatAdmin() {
       .onSnapshot((snapshot) => {
         setmessages(
           snapshot.docs.map((doc) => ({
+            id: doc.data().id,
+            MessageRefID: doc.id,
             AdminName: doc.data().AdminName,
             message: doc.data().message,
           }))
         );
+        messages.map((msg) => {
+          console.log(msg.MessageRefID)
+          setmessageRef(msg.MessageRefID);
+        });
         setDataloading(false);
       });
   };
@@ -122,11 +135,10 @@ function ChatAdmin() {
                 >
                   <div className="chat-box">
                     <p className="message-text">
-                      <strong>
-                        {message.AdminName}: {message.message}.
-                      </strong>
+                      <strong>{message.AdminName}:</strong> {message.message}.
                     </p>
                     {/* <p className="message-text">Send at: {message.timestamp== null? (<p>Reload To fetch</p>):(<p>{message.timestamp}</p>)}</p> */}
+
                   </div>
                 </li>
               ))}

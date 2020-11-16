@@ -38,7 +38,7 @@
 .chat-box {
   background-color: #53d769;
   width: 80vmin;
-  height: 10vmin;
+  height: 13vmin;
   align-items: center;
   border-radius: 25px;
   margin-bottom: 3%;
@@ -49,7 +49,7 @@
   text-align: center;
   justify-content: center;
   color: white;
-  padding-top: 2%;
+  padding: 2%;
 }
 .btn-chat:hover{
   background-color: grey
