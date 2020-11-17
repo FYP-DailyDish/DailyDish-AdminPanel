@@ -7,6 +7,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore";
 import GradeIcon from "@material-ui/icons/Grade";
 import { db } from "../Firebase";
+import AdminModal from "./AdminModal";
 function AdminViewList({
   key,
   userID,
@@ -15,6 +16,7 @@ function AdminViewList({
   adminstatus,
   loginUserAdminStatus,
   disable,
+  full,
 }) {
   const [disableStatus, setdisableStatus] = useState(false);
 
@@ -88,9 +90,10 @@ function AdminViewList({
               <div>
                 {adminstatus !== "Super" ? (
                   <div className="super-controls">
-                    <Button style={{ marginRight: "2%" }} variant="info">
+                    {/* <Button style={{ marginRight: "2%" }} variant="info">
                       <PersonIcon /> View Profile
-                    </Button>
+                    </Button> */}
+                    <AdminModal userInfo={full} />
                     {console.log(disable)}
                     {disable === false ? (
                       <>
@@ -102,7 +105,7 @@ function AdminViewList({
                           <CancelIcon /> Disable Admin
                         </Button>
                         <Button variant="success" onClick={SuperAdminMaker}>
-                          <GradeIcon/> Make Super Admin
+                          <GradeIcon /> Make Super Admin
                         </Button>
                       </>
                     ) : (
@@ -118,12 +121,14 @@ function AdminViewList({
                 ) : (
                   <div className="super-controls">
                     <p className="superadmin-control">
-                     <GradeIcon/> Super Admin
-                     <Button style={{marginLeft:"3vmin"}} variant="info">
-                      <PersonIcon /> View Profile
-                    </Button> 
+                      <p className="admin-info">
+                        <GradeIcon /> Super Admin
+                      </p>
+                      <AdminModal userInfo={full} />
                     </p>
-                  
+                    {/* <Button style={{marginLeft:"3vmin"}} variant="info">
+                      <PersonIcon /> View Profile
+                    </Button>  */}
                   </div>
                 )}
               </div>

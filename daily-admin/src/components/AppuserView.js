@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
+import UserModal from './UserModal'
 import "./AdminViewList.css";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import PersonIcon from "@material-ui/icons/Person";
@@ -15,6 +16,7 @@ function AppuserView({
   adminstatus,
   loginUserAdminStatus,
   disable,
+  full
 }) {
   const [disableStatus, setdisableStatus] = useState(false);
 
@@ -83,9 +85,10 @@ function AppuserView({
             {loginUserAdminStatus === "Super" ? (
               <div>
                 <div className="super-controls">
-                  <Button style={{ marginRight: "2%" }} variant="info">
+                  {/* <Button style={{ marginRight: "2%" }} variant="info">
                     <PersonIcon /> View Profile
-                  </Button>
+                  </Button> */}
+                  <UserModal userInfo={full}/>
                   {console.log(disable)}
                   {disable === false ? (
                     <>
@@ -111,9 +114,10 @@ function AppuserView({
               </div>
             ) : (
               <div className="super-controls">
-                <Button style={{ marginRight: "2%" }} variant="info">
+                {/* <Button style={{ marginRight: "2%" }} variant="info">
                   View Profile
-                </Button>
+                </Button> */}
+                <UserModal  userInfo={full}/>
               </div>
             )}
             {/* {console.log(CurrentUserAdminStatus)} */}

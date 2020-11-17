@@ -41,7 +41,8 @@ function Adminusers() {
             UserName: doc.data().UserName,
             timestamp: doc.data().timestamp,
             AdminStatus: doc.data().AdminStatus,
-            Disable: doc.data().Disable
+            Disable: doc.data().Disable,
+          
 
           }))
         );
@@ -128,6 +129,7 @@ function Adminusers() {
                     adminstatus={user.AdminStatus}
                     loginUserAdminStatus={loginUserAdminStatus}
                     disable={user.Disable}
+                    full={user}
                   />
                 ))}
               </div>
