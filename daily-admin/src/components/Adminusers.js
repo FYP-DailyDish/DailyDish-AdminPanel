@@ -38,12 +38,11 @@ function Adminusers() {
         setadminUsers(
           snapshot.docs.map((doc) => ({
             id: doc.id,
+            UserEmail: doc.data().Useremail,
             UserName: doc.data().UserName,
             timestamp: doc.data().timestamp,
             AdminStatus: doc.data().AdminStatus,
             Disable: doc.data().Disable,
-          
-
           }))
         );
       });
@@ -79,7 +78,7 @@ function Adminusers() {
     setdataLoading(true);
     getallAdminUsers();
     setdataLoading(false);
-   
+
     // db.collection("admin-users")
     //   .onSnapshot((snapshot) => {
     //     setadminUsers(

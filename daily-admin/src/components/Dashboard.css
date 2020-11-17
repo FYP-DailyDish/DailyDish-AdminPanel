@@ -1,0 +1,36 @@
+
+.Dashcontent-div {
+    padding: 10vh;
+    float: right;
+    align-content: center;
+    width: 80vw;
+    margin: 1rem;
+    background-color: aqua;
+   
+    
+  }
+
+  .dashactivity-feed{
+    height: 85vh;
+    background-color: white;
+  }
+  .admintitle-size{
+
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 3.5vmin;
+    text-align: center;
+
+  }
+  .feedbtn-refresh{
+      float: right;
+      
+  }
+  .activity-descTitle{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-top: 5%;
+    text-align: center;
+    margin-right: 7%;
+  }
+  .list-design{
+    margin-bottom: 2vmin;
+  }

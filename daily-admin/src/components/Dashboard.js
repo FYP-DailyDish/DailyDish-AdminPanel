@@ -6,9 +6,18 @@ import { db } from "../Firebase";
 import { Link, useHistory } from "react-router-dom";
 import "./Sidemenu.css";
 import { Button, Spinner } from "react-bootstrap";
+import "./Dashboard.css";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import AdminActivityList from "./AdminActivityList"
+import * as functions from "firebase/functions"
 
 function Dashboard() {
   const [dataload, setdataload] = useState(false);
+  const [adminData, setadminData] = useState([]);
+  const [userData, setuserData] = useState([]);
+  const [ChefData, setChefData] = useState([]);
+  const [RiderData, setRiderData] = useState([]);
+  const [dataLoading, setdataLoading] = useState(false)
   const history = useHistory();
   const [Astatus, setAstatus] = useState(false);
   const { logout, currentUser } = useAuth();
@@ -24,21 +33,33 @@ function Dashboard() {
       });
     setdataload(false);
   };
+  const getallAdminUsers = async () => {
+    setdataLoading(true);
+
+    await db
+      .collection("admin-users")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setadminData(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            UserEmail: doc.data().Useremail,
+            UserName: doc.data().UserName,
+            timestamp: doc.data().timestamp,
+            AdminStatus: doc.data().AdminStatus,
+            Disable: doc.data().Disable,
+          }))
+        );
+      });
+      
+    }
+
   useEffect(() => {
     const unsub = getStatus();
-    return unsub;
+    const adminunsub = getallAdminUsers()
+    return unsub && adminunsub;
   }, []);
-  async function handleLogout() {
-    try {
-      await logout();
-      history.push("/login");
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  // const logingout = async()=>{
-  //   await logout();
-  // }
+
   return (
     <div className="dash-container">
       {dataload === true ? (
@@ -48,21 +69,30 @@ function Dashboard() {
       ) : (
         <>
           {Astatus == true ? (
-            <>
-              {/* <div>
-                <h1>You have been disabled by the Super Admin</h1>
-              </div>
-              <Button variant="outline-dark" onClick={handleLogout}>
-                Logout
-              </Button> */}
-              
-              {history.push("/disabled")}
-              
-            </>
+            <>{history.push("/disabled")}</>
           ) : (
             <>
               <CustomNavbar />
               <SideMenuComp />
+
+              <div className="Dashcontent-div">
+                <div className="dashactivity-feed">
+                  <p className="admintitle-size">
+                    <strong>Activity Feed</strong>
+                    <Button className="feedbtn-refresh" variant="dark">
+                      <RefreshIcon />
+                    </Button>
+                  </p>
+                 <div>
+                   <p className="activity-descTitle"><strong>Admin Activity</strong></p>
+                   <ul>
+                    {adminData.map((user)=>(
+                      <AdminActivityList admin={user}  />
+                    ))}
+                   </ul>
+                 </div>
+                </div>
+              </div>
             </>
           )}
         </>

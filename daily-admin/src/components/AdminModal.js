@@ -5,12 +5,16 @@ import { Button, Spinner } from "react-bootstrap";
 import PersonIcon from "@material-ui/icons/Person";
 import { db } from "../Firebase";
 import firebase from "firebase";
+import PersonAddDisabledIcon from "@material-ui/icons/PersonAddDisabled";
+import "./AdminModal.css";
+import GradeIcon from "@material-ui/icons/Grade";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     width: "50%",
-    maxWidth: "100vw",
-    maxHeight: "50%",
+    maxWidth: "120vw",
+    maxHeight: "75%",
     position: "fixed",
     top: "40%",
     left: "50%",
@@ -42,7 +46,7 @@ function AdminModal({ userInfo }) {
       .ref("users/" + userInfo.id + "/profile.jpg")
       .getDownloadURL()
       .then((imgUrl) => {
-      console.log(imgUrl)
+        console.log(imgUrl);
         setdataLoading(false);
         setPimage(imgUrl);
         setPavail(true);
@@ -60,31 +64,44 @@ function AdminModal({ userInfo }) {
     <>
       <Modal open={open} onClose={closeModalHandler}>
         <div className={classes.paper}>
-          <h1> {userInfo.UserName} </h1>
-          <p>Admin Status: {userInfo.AdminStatus}</p>
-          <p>Banned Status: {userInfo.Disable.toString()}</p>
           {dataLoading ? (
-                  <div className="spinner-holder">
-                    <Spinner animation="border" />
-                  </div>
-                ) : (
-                  <div>
-                    {Pavail ? (
-                      <div className="image-holder">
-                        <img
-                          id="new-image"
-                          className="profile-photo"
-                          alt="profile image"
-                          src={Pimage}
-                        />
-                      </div>
-                    ) : (
-                      <div>
-                        <p>No Profile Photo Availaible</p>
-                      </div>
-                    )}
-                  </div>
-                )}
+            <div className="spinner-holder">
+              <Spinner animation="border" />
+            </div>
+          ) : (
+            <div>
+              {Pavail ? (
+                <div className="image-holder">
+                  <img
+                    id="new-image"
+                    className="profile-photo"
+                    alt="profile image"
+                    src={Pimage}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <p className="modal-text">
+                    {" "}
+                    <SentimentVeryDissatisfiedIcon /> No Profile Photo
+                    Availaible{" "}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+          <h1 className="userName-text"> {userInfo.UserName} </h1>
+          <p className="modal-text">
+            Email: <strong>{userInfo.UserEmail}</strong>{" "}
+          </p>
+          <p className="modal-text">
+            <GradeIcon /> Admin Status: <strong>{userInfo.AdminStatus}</strong>{" "}
+          </p>
+          <p className="modal-text">
+            <PersonAddDisabledIcon /> Banned Status:{" "}
+            <strong>{userInfo.Disable.toString()}</strong>
+          </p>
+
           {/* <input
             placeholder={todo.todo}
             value={input}

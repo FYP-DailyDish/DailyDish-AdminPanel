@@ -68,6 +68,7 @@ function UpdateProfile() {
       .ref("users/" + currentUser.uid + "/profile.jpg")
       .put(file)
       .then(() => {
+        console.log(file);
         setuploadMessage("Your Profile Image has been Set!");
       })
       .catch((error) => {
@@ -136,7 +137,6 @@ function UpdateProfile() {
                 <div className="email-holder">
                   <h3>{currentUser.email}</h3>
                   <p>
-                    
                     {adminStatus == "Super" ? (
                       <p>
                         Admin Status :<GradeIcon /> {adminStatus}
