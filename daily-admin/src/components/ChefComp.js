@@ -10,7 +10,7 @@ function ChefComp() {
         <SideMenuComp />
         <div className="content-div">
           <div className="activity-feed">
-            <h3>Coming Soon....</h3>
+            <h3>Coming Soon.... 🌕 </h3>
           </div>
         </div>
       </div>
