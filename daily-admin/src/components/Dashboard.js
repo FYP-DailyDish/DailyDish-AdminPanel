@@ -8,8 +8,9 @@ import "./Sidemenu.css";
 import { Button, Spinner } from "react-bootstrap";
 import "./Dashboard.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
-import AdminActivityList from "./AdminActivityList"
-import * as functions from "firebase/functions"
+import AdminActivityList from "./AdminActivityList";
+import UserActivityList from "./UserActivityList";
+import * as functions from "firebase/functions";
 
 function Dashboard() {
   const [dataload, setdataload] = useState(false);
@@ -17,7 +18,7 @@ function Dashboard() {
   const [userData, setuserData] = useState([]);
   const [ChefData, setChefData] = useState([]);
   const [RiderData, setRiderData] = useState([]);
-  const [dataLoading, setdataLoading] = useState(false)
+  const [dataLoading, setdataLoading] = useState(false);
   const history = useHistory();
   const [Astatus, setAstatus] = useState(false);
   const { logout, currentUser } = useAuth();
@@ -51,13 +52,36 @@ function Dashboard() {
           }))
         );
       });
-      
-    }
+  };
+  const getallUsers = async () => {
+    setdataLoading(true);
+
+    await db
+      .collection("app-users")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setuserData(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            UserEmail: doc.data().UserEmail,
+            UserName: doc.data().UserName,
+            timestamp: doc.data().timestamp,
+            Disable: doc.data().Disable,
+          }))
+        );
+      });
+  };
+  const handleRefresh = async () => {
+    console.log("HandleRefresh() triggered");
+    getallAdminUsers();
+    getallUsers();
+  };
 
   useEffect(() => {
     const unsub = getStatus();
-    const adminunsub = getallAdminUsers()
-    return unsub && adminunsub;
+    const adminUnsub = getallAdminUsers();
+    const userUnsub = getallUsers();
+    return unsub && adminUnsub && userUnsub;
   }, []);
 
   return (
@@ -79,18 +103,32 @@ function Dashboard() {
                 <div className="dashactivity-feed">
                   <p className="admintitle-size">
                     <strong>Activity Feed</strong>
-                    <Button className="feedbtn-refresh" variant="dark">
+                    <Button
+                      onClick={handleRefresh}
+                      className="feedbtn-refresh"
+                      variant="dark"
+                    >
                       <RefreshIcon />
                     </Button>
                   </p>
-                 <div>
-                   <p className="activity-descTitle"><strong>Admin Activity</strong></p>
-                   <ul>
-                    {adminData.map((user)=>(
-                      <AdminActivityList admin={user}  />
-                    ))}
-                   </ul>
-                 </div>
+                  <div>
+                    <p className="activity-descTitle">
+                      <strong>Admin Activity</strong>
+                    </p>
+                    <ul>
+                      {adminData.map((admin) => (
+                        <AdminActivityList admin={admin} />
+                      ))}
+                    </ul>
+                    <p className="activity-descTitle">
+                      <strong>New User Activity</strong>
+                    </p>
+                    <ul>
+                      {userData.map((user) => (
+                        <UserActivityList user={user} />
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </>

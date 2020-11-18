@@ -5,7 +5,7 @@
     align-content: center;
     width: 80vw;
     margin: 1rem;
-    background-color: aqua;
+    
    
     
   }
@@ -19,6 +19,7 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 3.5vmin;
     text-align: center;
+   
 
   }
   .feedbtn-refresh{
@@ -30,6 +31,7 @@
     margin-top: 5%;
     text-align: center;
     margin-right: 7%;
+    padding: 1%;
   }
   .list-design{
     margin-bottom: 2vmin;
