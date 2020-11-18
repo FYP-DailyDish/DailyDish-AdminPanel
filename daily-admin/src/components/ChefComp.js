@@ -10,7 +10,8 @@ function ChefComp() {
         <SideMenuComp />
         <div className="content-div">
           <div className="activity-feed">
-            <h3>I am chef from Firebase</h3>
+            <h3>In Production</h3>
+            <h3>Coming Soon!</h3>
           </div>
         </div>
       </div>
