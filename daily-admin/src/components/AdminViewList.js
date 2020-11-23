@@ -134,9 +134,10 @@ function AdminViewList({
               </div>
             ) : (
               <div className="super-controls">
-                <Button style={{ marginRight: "2%" }} variant="info">
+                {/* <Button style={{ marginRight: "2%" }} variant="info">
                   View Profile
-                </Button>
+                </Button> */}
+                <AdminModal userInfo={full} />
               </div>
             )}
             {/* {console.log(CurrentUserAdminStatus)} */}
