@@ -94,7 +94,7 @@ function ChatAdmin() {
           </div>
 
           <div className="input-holder">
-            <InputGroup className="mb-3" id="input-area">
+            <InputGroup className="mb-4" id="input-area">
               <FormControl
                 placeholder="Type Your Message"
                 aria-label="Type Your Message"

@@ -19,8 +19,9 @@
   border: none;
 }
 .input-holder {
-  width: 130vmin;
-  padding-left: 5%;
+  width: 100vmin;
+ 
+ 
 }
 .title-holder {
   font-size: 40px;
@@ -28,7 +29,7 @@
 }
 .holder {
   background-color: grey;
-  height: 5.5vh;
+  height: 5.9vh;
   text-align: center;
   justify-content: center;
 }
@@ -52,7 +53,8 @@
   padding: 2%;
 }
 .btn-chat:hover{
-  background-color: grey
+  background-color: grey;
+  
 }
 .del-icon{
   float : right ;
