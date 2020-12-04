@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^4.5.3",
     "dotenv": "^8.2.0",
+    "firebase": "^8.1.2",
     "firebase-admin": "^9.3.0",
     "firebase-functions": "^3.11.0",
     "prismic-javascript": "^3.0.2",

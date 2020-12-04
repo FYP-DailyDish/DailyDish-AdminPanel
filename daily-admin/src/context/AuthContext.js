@@ -21,7 +21,7 @@ export function AuthProvider({ children }) {
     console.log(password);
     return auth.createUserWithEmailAndPassword(email, password).then((cred) => {
       console.log("i am initiated 🔥  ");
-      console.log(cred.user.uid);
+      console.log("  cred===> ",cred);
       db.collection("admin-users").doc(cred.user.uid).set({
         UserName: username,
         Useremail: email,
