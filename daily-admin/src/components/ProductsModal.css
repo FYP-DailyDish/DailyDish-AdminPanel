@@ -1,0 +1,12 @@
+.list{
+    list-style: none;
+    border: 1px solid grey;
+    padding: 10px;
+}
+
+.img{
+    text-align: center;
+    height: 200px;
+    width: 300px;
+    padding: 10px;
+}

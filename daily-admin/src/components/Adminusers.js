@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , } from "react";
 import CustomNavbar from "./CustomNav";
 import SideMenuComp from "./SideMenuComp";
 import { useAuth } from "../context/AuthContext";
@@ -107,9 +107,11 @@ function Adminusers() {
               <RefreshIcon />
               Refresh List
             </Button>
+           
           </div>
 
           <div>
+         <div class="num-admin">Number of Registered Admins: {adminUsers.length}</div> 
             {console.log(adminUsers)}
             {dataLoading ? (
               <Spinner animation="border" />

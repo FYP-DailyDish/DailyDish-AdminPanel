@@ -40,6 +40,9 @@ function Appusers() {
             id: doc.id,
             UserName: doc.data().UserName,
             timestamp: doc.data().timestamp,
+            reviewStatus: doc.data().reviewStatus,
+            CurrentAddress: doc.data().CurrentAddress,
+            phnumber: doc.data().phnumber,
             Disable: doc.data().Disable
 
           }))
@@ -106,9 +109,13 @@ function Appusers() {
               <RefreshIcon />
               Refresh List
             </Button>
+            
           </div>
 
           <div>
+          <div className="num-admin">
+              Number of Application Users: {adminUsers.length}
+            </div>
             {console.log(adminUsers)}
             {dataLoading ? (
               <Spinner animation="border" />
@@ -123,6 +130,7 @@ function Appusers() {
                     key={user.id}
                     userID={user.id}
                     user={user.UserName}
+
                     time={user.timestamp.toDate().toString()}
                     adminstatus={user.AdminStatus}
                     loginUserAdminStatus={loginUserAdminStatus}

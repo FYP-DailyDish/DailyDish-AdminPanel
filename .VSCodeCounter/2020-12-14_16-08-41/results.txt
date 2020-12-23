@@ -1,0 +1,88 @@
+Date : 2020-12-14 16:08:41
+Directory : /Users/saadahmed/Documents/GitHub/DailyDishAdminV3
+Total : 54 files,  21280 codes, 209 comments, 273 blanks, all 21762 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          5 |     18,640 |         10 |          4 |     18,654 |
+| JavaScript |         31 |      1,765 |        174 |        178 |      2,117 |
+| XML        |          3 |        469 |          0 |          3 |        472 |
+| CSS        |         13 |        341 |          2 |         54 |        397 |
+| Markdown   |          1 |         38 |          0 |         33 |         71 |
+| HTML       |          1 |         27 |         23 |          1 |         51 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                               | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                  |         54 |     21,280 |        209 |        273 |     21,762 |
+| daily-admin                                                                                        |         54 |     21,280 |        209 |        273 |     21,762 |
+| daily-admin/public                                                                                 |          5 |        533 |         23 |          5 |        561 |
+| daily-admin/src                                                                                    |         45 |      2,113 |        176 |        233 |      2,522 |
+| daily-admin/src/components                                                                         |         35 |      1,938 |        158 |        197 |      2,293 |
+| daily-admin/src/context                                                                            |          1 |         59 |          0 |         15 |         74 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                           | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/README.md                           | Markdown   |         38 |          0 |         33 |         71 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/firebase.json                       | JSON       |          7 |         10 |          0 |         17 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/package-lock.json                   | JSON       |     18,540 |          0 |          1 |     18,541 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/package.json                        | JSON       |         49 |          0 |          1 |         50 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/public/browserconfig.xml            | XML        |          9 |          0 |          1 |         10 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/public/index.html                   | HTML       |         27 |         23 |          1 |         51 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/public/manifest.json                | JSON       |         25 |          0 |          1 |         26 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/public/safari-pinned-tab.svg        | XML        |        453 |          0 |          1 |        454 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/public/site.webmanifest             | JSON       |         19 |          0 |          1 |         20 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/App.css                         | CSS        |         10 |          0 |          3 |         13 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/App.js                          | JavaScript |         39 |          0 |          2 |         41 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/App.test.js                     | JavaScript |          7 |          0 |          2 |          9 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/Firebase.js                     | JavaScript |         15 |         11 |          5 |         31 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AdminActivityList.js | JavaScript |         16 |          0 |          3 |         19 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AdminModal.css       | CSS        |          8 |          0 |          0 |          8 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AdminModal.js        | JavaScript |        118 |         11 |          5 |        134 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AdminUser.css        | CSS        |          6 |          0 |          2 |          8 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AdminViewList.css    | CSS        |         52 |          1 |          4 |         57 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AdminViewList.js     | JavaScript |        133 |         13 |          6 |        152 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Adminusers.js        | JavaScript |        106 |         30 |         13 |        149 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Appuser.css          | CSS        |          6 |          0 |          3 |          9 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/AppuserView.js       | JavaScript |        113 |         12 |          7 |        132 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Appusers.js          | JavaScript |        104 |         30 |         14 |        148 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/ChatAdmin.css        | CSS        |         60 |          0 |          5 |         65 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/ChatAdmin.js         | JavaScript |        118 |          9 |         14 |        141 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/ChefComp.js          | JavaScript |         17 |          0 |          4 |         21 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/CustomNav.js         | JavaScript |         74 |          1 |         10 |         85 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Dashboard.css        | CSS        |         29 |          0 |          9 |         38 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Dashboard.js         | JavaScript |        135 |          0 |          8 |        143 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Disabled.js          | JavaScript |         24 |          0 |          4 |         28 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/ForgotPass.js        | JavaScript |         66 |         13 |          6 |         85 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/ListFeed.css         | CSS        |         22 |          1 |          8 |         31 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/ListFeed.js          | JavaScript |         23 |          0 |          4 |         27 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Login.js             | JavaScript |         82 |         13 |         10 |        105 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/MessagesFeed.js      | JavaScript |         32 |          0 |          5 |         37 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/OrderComp.js         | JavaScript |         17 |          0 |          4 |         21 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/PrivateRoute.js      | JavaScript |         14 |          0 |          2 |         16 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/RiderComp.js         | JavaScript |         17 |          0 |          3 |         20 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/SideMenuComp.js      | JavaScript |         28 |          0 |          3 |         31 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Sidemenu.css         | CSS        |         85 |          0 |          8 |         93 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Sidemenu.js          | JavaScript |         52 |          0 |          2 |         54 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/Signup.js            | JavaScript |        104 |         13 |          6 |        123 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/UpdateProfile.css    | CSS        |         27 |          0 |          4 |         31 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/UpdateProfile.js     | JavaScript |        152 |          0 |          8 |        160 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/UserActivityList.js  | JavaScript |         16 |          0 |          3 |         19 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/UserModal.js         | JavaScript |         58 |         11 |          4 |         73 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/content.css          | CSS        |          7 |          0 |          4 |         11 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/components/disable.css          | CSS        |         17 |          0 |          2 |         19 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/context/AuthContext.js          | JavaScript |         59 |          0 |         15 |         74 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/index.css                       | CSS        |         12 |          0 |          2 |         14 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/index.js                        | JavaScript |         13 |          3 |          3 |         19 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/logo.svg                        | XML        |          7 |          0 |          1 |          8 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/reportWebVitals.js              | JavaScript |         12 |          0 |          2 |         14 |
+| /Users/saadahmed/Documents/GitHub/DailyDishAdminV3/daily-admin/src/setupTests.js                   | JavaScript |          1 |          4 |          1 |          6 |
+| Total                                                                                              |            |     21,280 |        209 |        273 |     21,762 |
++----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

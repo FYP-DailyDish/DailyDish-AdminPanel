@@ -8,30 +8,24 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import SettingsBackupRestoreIcon from "@material-ui/icons/SettingsBackupRestore";
 import GradeIcon from "@material-ui/icons/Grade";
 import { db } from "../Firebase";
-function AppuserView({
-  key,
-  userID,
-  user,
-  time,
-  adminstatus,
-  loginUserAdminStatus,
-  disable,
-  full
-}) {
+import ChefModal from "./ChefModal";
+import KitchenIcon from '@material-ui/icons/Kitchen';
+import ProductsModal from "./ProductsModal";
+function ChefUserView({userInfo,loginUserAdminStatus}) {
   const [disableStatus, setdisableStatus] = useState(false);
 
-  const SuperAdminMaker = () => {
-    console.log("You Have Upgraded an admin");
-    db.collection("app-users").doc(userID).set(
-      {
-        AdminStatus: "Super",
-      },
-      { merge: true }
-    );
-  };
+//   const SuperAdminMaker = () => {
+//     console.log("You Have Upgraded an admin");
+//     db.collection("app-users").doc(userInfo.id).set(
+//       {
+//         AdminStatus: "Super",
+//       },
+//       { merge: true }
+//     );
+//   };
 
   const DisableStatusHandlerFalse = () => {
-    db.collection("app-users").doc(userID).update(
+    db.collection("chefs").doc(userInfo.id).update(
       {
         Disable: false,
       },
@@ -41,7 +35,7 @@ function AppuserView({
   };
 
   const DisableStatusHandlerTrue = () => {
-    db.collection("app-users").doc(userID).update(
+    db.collection("chefs").doc(userInfo.id).update(
       {
         Disable: true,
       },
@@ -69,12 +63,13 @@ function AppuserView({
   return (
     <div className="adminfeed-holder">
       <ul style={{ listStyleType: "none" }} className="active-feedlist">
-        <li className="list-item" key={key}>
+        <li className="list-item" key={userInfo.id}>
           <div className="admindiv-list">
-            <SupervisorAccountIcon /> {user}
+            <SupervisorAccountIcon /> {userInfo.UserName}
+        <div className="kitchen-name" ><KitchenIcon /> {userInfo.KitchenName}</div>
             <div className="admin-timestamp">
               <p>
-                <strong> Joined on:</strong> {time.slice(0, 21)}
+                <strong> Joined on:</strong> {userInfo.timestamp.toDate().toString().slice(0, 21)}
               </p>
               <div className="admin-info"></div>
             </div>
@@ -88,9 +83,10 @@ function AppuserView({
                   {/* <Button style={{ marginRight: "2%" }} variant="info">
                     <PersonIcon /> View Profile
                   </Button> */}
-                  <UserModal userInfo={full}/>
-                  {console.log(disable)}
-                  {disable === false ? (
+                  <ChefModal userInfo={userInfo}/>
+                  <ProductsModal userInfo={userInfo}/>
+                  {console.log(userInfo.Disable)}
+                  {userInfo.Disable === false ? (
                     <>
                       <Button
                         style={{ marginRight: "2%" }}
@@ -117,7 +113,8 @@ function AppuserView({
                 {/* <Button style={{ marginRight: "2%" }} variant="info">
                   View Profile
                 </Button> */}
-                <UserModal  userInfo={full}/>
+                <ChefModal  userInfo={userInfo}/>
+                <ProductsModal userInfo={userInfo}/>
               </div>
             )}
             {/* {console.log(CurrentUserAdminStatus)} */}
@@ -128,4 +125,4 @@ function AppuserView({
   );
 }
 
-export default AppuserView;
+export default ChefUserView;

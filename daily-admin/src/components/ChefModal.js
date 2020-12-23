@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-function UserModal({ userInfo }) {
+function ChefModal({ userInfo }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -38,6 +38,7 @@ function UserModal({ userInfo }) {
         <div className={classes.paper}>
           <h1>{userInfo.UserName}</h1>
           <p>Current Address : {userInfo.CurrentAddress}</p>
+          <p>Kitchen Name: {userInfo.KitchenName}</p>
           <p>Phone Number : {userInfo.phnumber}</p>
           <p>Ban Status: {userInfo.Disable.toString()}</p>
           <p>
@@ -71,4 +72,4 @@ function UserModal({ userInfo }) {
   );
 }
 
-export default UserModal;
+export default ChefModal;

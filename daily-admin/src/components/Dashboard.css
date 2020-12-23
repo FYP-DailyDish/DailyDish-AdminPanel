@@ -36,3 +36,16 @@
   .list-design{
     margin-bottom: 2vmin;
   }
+.listStyle li{
+
+ padding: 10px;
+ font-size: 20px;
+  display: inline;
+  font-weight: bold;
+}
+.listStyle{
+  padding-top: 15px;
+  margin-right: 20px;
+  text-align: center;
+  
+}

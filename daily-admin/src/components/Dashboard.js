@@ -11,6 +11,7 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import AdminActivityList from "./AdminActivityList";
 import UserActivityList from "./UserActivityList";
 import * as functions from "firebase/functions";
+import ChefActivityList from "./ChefActivityList";
 
 function Dashboard() {
   const [dataload, setdataload] = useState(false);
@@ -53,6 +54,24 @@ function Dashboard() {
         );
       });
   };
+  const getallChefs = async () => {
+    setdataLoading(true);
+    const chefsref = db.collection("chefs").orderBy("timestamp", "desc");
+    await chefsref.onSnapshot((snapshot) => {
+      setChefData(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          UserName: doc.data().ChefName,
+          UserEmail: doc.data().Useremail,
+          KitchenName: doc.data().KitchenName,
+          timestamp: doc.data().timestamp,
+          CurrentAddress: doc.data().CurrentAddress,
+          phnumber: doc.data().phnumber,
+          Disable: doc.data().Disable,
+        }))
+      );
+    });
+  };
   const getallUsers = async () => {
     setdataLoading(true);
 
@@ -75,13 +94,15 @@ function Dashboard() {
     console.log("HandleRefresh() triggered");
     getallAdminUsers();
     getallUsers();
+    getallChefs();
   };
 
   useEffect(() => {
     const unsub = getStatus();
     const adminUnsub = getallAdminUsers();
     const userUnsub = getallUsers();
-    return unsub && adminUnsub && userUnsub;
+    const chefunsub = getallChefs();
+    return unsub && adminUnsub && userUnsub && chefunsub;
   }, []);
 
   return (
@@ -112,6 +133,16 @@ function Dashboard() {
                     </Button>
                   </p>
                   <div>
+                    <ul className="listStyle">
+                      <li>
+                        Administrators: {adminData.length}
+                      </li>
+                      <li> Customers: {userData.length}</li>
+                      <li>Chefs: {ChefData.length}</li>
+                      <li>Riders: TBD</li>
+                    </ul>
+                  </div>
+                  <div>
                     <p className="activity-descTitle">
                       <strong>Admin Activity</strong>
                     </p>
@@ -126,6 +157,14 @@ function Dashboard() {
                     <ul>
                       {userData.map((user) => (
                         <UserActivityList user={user} />
+                      ))}
+                    </ul>
+                    <p className="activity-descTitle">
+                      <strong>New Chef</strong>
+                    </p>
+                    <ul>
+                      {ChefData.map((user) => (
+                        <ChefActivityList user={user} />
                       ))}
                     </ul>
                   </div>
