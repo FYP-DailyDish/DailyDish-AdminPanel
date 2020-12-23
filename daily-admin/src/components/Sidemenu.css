@@ -12,10 +12,12 @@
   color: black !important;
 }
 .nav-logo {
-  width: 5.5vmin;
+  width: 6.0vmin;
   height: 5.5vmin;
-  padding: 1%;
+margin-right: 2%;
   border-radius: 20%;
+  background-color:#FF6347;
+  opacity: 1;
 }
 
 .dash-container {

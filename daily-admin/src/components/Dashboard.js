@@ -12,6 +12,7 @@ import AdminActivityList from "./AdminActivityList";
 import UserActivityList from "./UserActivityList";
 import * as functions from "firebase/functions";
 import ChefActivityList from "./ChefActivityList";
+import RiderActivityList from "./RiderActivityList";
 
 function Dashboard() {
   const [dataload, setdataload] = useState(false);
@@ -72,6 +73,22 @@ function Dashboard() {
       );
     });
   };
+  const getallRiders = async () => {
+    setdataLoading(true);
+    const chefsref = db.collection("riders").orderBy("timestamp", "desc");
+    await chefsref.onSnapshot((snapshot) => {
+      setRiderData(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          UserName: doc.data().UserName,
+          UserEmail: doc.data().UserEmail,
+          timestamp: doc.data().timestamp,
+          phnumber: doc.data().phnumber,
+          Disable: doc.data().Disable,
+        }))
+      );
+    });
+  };
   const getallUsers = async () => {
     setdataLoading(true);
 
@@ -95,6 +112,7 @@ function Dashboard() {
     getallAdminUsers();
     getallUsers();
     getallChefs();
+    getallRiders();
   };
 
   useEffect(() => {
@@ -102,7 +120,9 @@ function Dashboard() {
     const adminUnsub = getallAdminUsers();
     const userUnsub = getallUsers();
     const chefunsub = getallChefs();
-    return unsub && adminUnsub && userUnsub && chefunsub;
+    const riderunsub = getallRiders();
+
+    return unsub && adminUnsub && userUnsub && chefunsub && riderunsub;
   }, []);
 
   return (
@@ -134,12 +154,10 @@ function Dashboard() {
                   </p>
                   <div>
                     <ul className="listStyle">
-                      <li>
-                        Administrators: {adminData.length}
-                      </li>
+                      <li>Administrators: {adminData.length}</li>
                       <li> Customers: {userData.length}</li>
                       <li>Chefs: {ChefData.length}</li>
-                      <li>Riders: TBD</li>
+                      <li>Riders: {RiderData.length}</li>
                     </ul>
                   </div>
                   <div>
@@ -160,11 +178,19 @@ function Dashboard() {
                       ))}
                     </ul>
                     <p className="activity-descTitle">
-                      <strong>New Chef</strong>
+                      <strong>New Chefs</strong>
                     </p>
                     <ul>
                       {ChefData.map((user) => (
                         <ChefActivityList user={user} />
+                      ))}
+                    </ul>
+                    <p className="activity-descTitle">
+                      <strong>New Riders</strong>
+                    </p>
+                    <ul>
+                      {RiderData.map((user) => (
+                        <RiderActivityList user={user} />
                       ))}
                     </ul>
                   </div>

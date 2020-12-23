@@ -1,0 +1,20 @@
+.listdesign{
+    list-style: none;
+}
+.list-styl{
+border: 1px solid grey;
+margin: 10px;
+padding: 10px;
+}
+.sublist-styl{
+    list-style: none; 
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 20px;
+    width: 50vw;
+    text-align: center;
+    margin-left: 10%;
+}
+.title-order{
+    text-align: center;
+}
