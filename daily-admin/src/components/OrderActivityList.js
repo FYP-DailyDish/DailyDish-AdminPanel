@@ -3,6 +3,19 @@ import "./Dashboard.css";
 import "./OrderActivityList.css";
 
 function OrderActivityList({ user }) {
+//   const showHideHandler = () => {
+//     document
+//       .getElementById("showHidebtn")
+//       .addEventListener("click", function () {
+//         var targetDiv = document.getElementById("showHide");
+//         if (targetDiv.style.display == "none") {
+//           targetDiv.style.display = "block";
+//         } else {
+//           targetDiv.style.display = "none";
+//         }
+//       });
+//   };
+
   return (
     <>
       <h1 className="title-order">Orders Placed </h1>
@@ -41,32 +54,37 @@ function OrderActivityList({ user }) {
               <b>Placed On: </b>
               {user.timestamp}
             </p>
-            <h4 className="title-order">Ordered Items:</h4>
-            {user.item.map((use) => (
-              <ul>
-                <li className="sublist-styl">
-                  <div>
-                    <p>
-                      <b>Kitchen Name:</b> {use.kitchenName}
-                    </p>
-                    <p>
-                      <b>Product Name: </b>
-                      {use.productTitle}
-                    </p>
-                    <p>
-                      <b>Product Price: </b>
-                      {use.productPrice}
-                    </p>
-                    <p>
-                      <b>Quantity:</b> {use.quantity}
-                    </p>
-                    <p>
-                      <b>Sum:</b> {use.sum}
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            ))}
+            {/* <button id="showHidebtn" onClick={showHideHandler}>
+              Testing
+            </button> */}
+            <div id="showHide">
+              <h4 className="title-order">Ordered Items:</h4>
+              {user.item.map((use) => (
+                <ul>
+                  <li className="sublist-styl">
+                    <div>
+                      <p>
+                        <b>Kitchen Name:</b> {use.kitchenName}
+                      </p>
+                      <p>
+                        <b>Product Name: </b>
+                        {use.productTitle}
+                      </p>
+                      <p>
+                        <b>Product Price: </b>
+                        {use.productPrice}
+                      </p>
+                      <p>
+                        <b>Quantity:</b> {use.quantity}
+                      </p>
+                      <p>
+                        <b>Sum:</b> {use.sum}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              ))}
+            </div>
           </div>
         </li>
       ))}
